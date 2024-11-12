@@ -1,3 +1,4 @@
+
 import AuthForm from "../components/AuthForm/AuthForm";
 
 const Home = ({ auth, authAction, logout, businesses, users, reviews }) => {
@@ -5,19 +6,14 @@ const Home = ({ auth, authAction, logout, businesses, users, reviews }) => {
     <div>
       <h1>Home</h1>
       <p>
-        Display some interesting information about our {businesses.length}{" "}
-        Businesses
+        See reviews for the {businesses.length}{" "}
+        businesses on our website
         <br />
-        Display some interesting information about our {users.length} Users
+        Check out reviews from {users.length} users
         <br />
-        Display some interesting information about our {reviews.length} Reviews
+        Explore through {reviews.length} helpful reviews
       </p>
-      {!auth.id ? (
-        <>
-          <AuthForm authAction={authAction} mode="login" />
-          <AuthForm authAction={authAction} mode="register" />
-        </>
-      ) : null}
+          
     </div>
   );
 };
