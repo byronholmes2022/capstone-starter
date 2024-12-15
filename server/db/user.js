@@ -1,9 +1,10 @@
 const { client } = require("./client");
+require("dotenv").config();
 
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const JWT = process.env.JWT || "shhh";
+const JWT = process.env.JWT_SECRET || "shhh"
 if (JWT === "shhh") {
   console.log("If deployed, set process.env.JWT to something other than shhh");
 }
@@ -72,4 +73,14 @@ const authenticate = async ({ username, password }) => {
   return { token };
 };
 
-module.exports = { createUser, findUserWithToken, fetchUsers, authenticate };
+const getSingleUser = async (id) => {
+  try{
+  const SQL = `SELECT * FROM users WHERE id=$1`;
+  const { rows: [user],
+    
+   } = await client.query(SQL, [id]);
+  return user;}
+  catch(err){console.log(err)}
+};
+
+module.exports = { createUser, findUserWithToken, fetchUsers, authenticate, getSingleUser};
